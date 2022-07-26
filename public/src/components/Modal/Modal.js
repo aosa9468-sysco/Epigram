@@ -4,7 +4,7 @@ import {Modal, Button, Form} from 'react-bootstrap';
 function EpigramModal(props) {
   return (
     <>
-      <Modal show={props.show} onHide={props.handleClose} centered>
+      <Modal show={props.show} onHide={props.handleClose} size="lg" centered>
       <Form onSubmit={props.onSubmit}>
         <Modal.Header closeButton>
           <Modal.Title>Add New Epigram</Modal.Title>
