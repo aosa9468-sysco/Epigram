@@ -47,9 +47,12 @@ function validateCreate(epigram) {
 async function create(epigram){
   validateCreate(epigram);
 
+  const lastId = await db.query('select max(id) from epigram');
+  const newId = lastId[0]['max'] +1;
+
   const result = await db.query(
-    'INSERT INTO epigram(quote, author) VALUES ($1, $2) RETURNING *',
-    [epigram.quote, epigram.author]
+    'INSERT INTO epigram(id, quote, author) VALUES ($1, $2, $3) RETURNING *',
+    [newId, epigram.quote, epigram.author]
   );
   let message = 'Error in creating epigram';
 

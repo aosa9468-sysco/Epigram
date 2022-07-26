@@ -1,25 +1,45 @@
-import React, {useState} from "react";
-import {Modal, Button} from 'react-bootstrap';
+import React from "react";
+import {Modal, Button, Form} from 'react-bootstrap';
 
 function EpigramModal(props) {
-  const [show, setShow] = useState(false);
-  const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
   return (
     <>
-      <Modal show={props.show} onHide={handleClose} centered>
+      <Modal show={props.show} onHide={props.handleClose} centered>
+      <Form onSubmit={props.onSubmit}>
         <Modal.Header closeButton>
-          <Modal.Title>Modal heading</Modal.Title>
+          <Modal.Title>Add New Epigram</Modal.Title>
         </Modal.Header>
-        <Modal.Body>Woohoo, you're reading this text in a modal!</Modal.Body>
+        <Modal.Body>
+          <Form.Group className="mb-3" controlId="formBasicQuote">
+            <Form.Label>Quote</Form.Label>
+            <Form.Control
+              type="text"
+              value={props.quote}
+              required
+              onChange={(e) => props.onChangeQuote(e)}
+              placeholder="Enter Quote"
+            />
+          </Form.Group>
+          <Form.Group className="mb-3" controlId="formBasicAuthor">
+            <Form.Label>Author</Form.Label>
+            <Form.Control
+              type="text"
+              value={props.author}
+              onChange={props.onChangeAuthor}
+              placeholder="Enter Author Name"
+            />
+          </Form.Group>
+        </Modal.Body>
         <Modal.Footer>
-          <Button variant="secondary" onClick={handleClose}>
-            Close
-          </Button>
-          <Button variant="primary" onClick={handleClose}>
-            Save Changes
+          <Button
+            variant="primary"
+            type="submit"
+            onClick={() => props.handleClose()}
+          >
+            Add
           </Button>
         </Modal.Footer>
+      </Form>
       </Modal>
     </>
   );
